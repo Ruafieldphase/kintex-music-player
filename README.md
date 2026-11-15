@@ -1,11 +1,11 @@
-# KINTEX music and film player
+# 우리가 모르는 작은 이야기
 
-Personal artwork and music comparison player. One177.5-second film and17MP3 candidates.
+키치링 × 레트로봇
 
-- Default: shuffled continuous playback of all17tracks, without repetition within a round.
-- Tap **함께 재생** once to begin; after the film ends, the next song and film restart together.
-- Optional pool: six prioritized candidates. Pause/resume and next track supported.
-- Source audio and film masters are preserved separately. This site contains192kbpsMP3 and1080pH.264 playback copies.
-- No sign-in, analytics, forms, or backend are used. Exact physical tablet playback is not yet verified.
+가방 끝에서 시작된 작은 만남이 공방과 풍경 속 이야기로 이어집니다. 키치링과 레트로봇의 하루를 음악과 함께 만나보세요.
 
-Published at the artwork owner's request. Frequency measurements are editorial comparison aids, not certified mood or aesthetic-fit measurements.
+https://ruafieldphase.github.io/kintex-music-player/
+
+‘감상 시작’을 누르면 영상과 음악이 함께 재생됩니다. 기본 설정은 전체17곡 랜덤 연속 재생이며, 영상이 끝나면 다른 음악과 함께 처음부터 이어집니다. 추천6곡 목록, 음악 선택, 일시정지, 다음 곡과 장면 이동도 사용할 수 있습니다.
+
+로그인 없이 감상할 수 있는 정적 웹사이트입니다. 개인 영상·음악 작품을 공개 감상하기 위한 페이지이며, 원본 영상·음원은 별도로 보존합니다.

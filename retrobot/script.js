@@ -1,12 +1,3 @@
-const instructions = [
-  "육각 테두리를 먼저 놓고, 검은 짧은 나사를 체결하세요.",
-  "반대쪽 육각 테두리를 놓고, 검은 짧은 나사를 체결하세요.",
-  "날개형 귀를 옆면 구멍에 맞추고, 짧은 검은 나사를 체결하세요.",
-  "둥근 금속 면이 바깥을 보게 놓고, 가운데에 짧은 검은 나사를 체결하세요.",
-  "긴 검은 나사를 밑면 왼쪽 구멍에 체결하세요. 발 모양의 나사 머리가 바깥에 남아요.",
-  "밑면 오른쪽에 긴 검은 나사를 체결한 뒤, 실물 완성 샘플과 두 다리의 노출 길이를 비교하세요.",
-];
-
 const items = [...document.querySelectorAll("[data-step]")];
 const player = document.querySelector(".player");
 const video = document.getElementById("stage-video");
@@ -21,11 +12,15 @@ const instruction = document.getElementById("instruction");
 const status = document.getElementById("status");
 const error = document.getElementById("load-error");
 const directVideo = document.getElementById("direct-video");
-let active = 0;
+let active = -1;
 
 function stepFromLocation() {
-  const value = new URL(location.href).searchParams.get("step");
-  return /^[1-6]$/.test(value ?? "") ? Number(value) : 1;
+  const params = new URL(location.href).searchParams;
+  const stage = params.get("stage");
+  if (/^[0-8]$/.test(stage ?? "")) return Number(stage);
+  // Keep previously shared six-stage links pointing to the original part.
+  const legacy = params.get("step");
+  return /^[1-6]$/.test(legacy ?? "") ? [0,1,2,3,5,7,8][Number(legacy)] : 0;
 }
 
 function playStep() {
@@ -38,24 +33,24 @@ function playStep() {
 }
 
 function showStep(number, { play = false, updateUrl = false, scroll = false } = {}) {
-  const code = String(number).padStart(2, "0");
-  const item = items[number - 1];
+  const code = number ? String(number).padStart(2, "0") : "overview";
+  const item = items[number];
   const label = item.querySelector("span").textContent;
   if (number !== active) {
     video.pause();
     active = number;
-    video.poster = `media/${code}.jpg`;
-    video.src = `media/${code}.mp4`;
+    video.poster = `media/eight/${code}.jpg`;
+    video.src = `media/eight/${code}.mp4`;
     directVideo.href = video.src;
     heading.textContent = label;
-    instruction.textContent = instructions[number - 1];
-    counter.textContent = `${code} / 06`;
-    counter.setAttribute("aria-label", `총 6단계 중 ${number}단계`);
-    video.setAttribute("aria-label", `${label} 체결 영상`);
+    instruction.textContent = item.dataset.instruction;
+    counter.textContent = number ? `${code} / 08` : "시작";
+    counter.setAttribute("aria-label", number ? `총 8단계 중 ${number}단계` : "시작");
+    video.setAttribute("aria-label", `${label} 영상`);
     items.forEach((link) => link.removeAttribute("aria-current"));
     item.setAttribute("aria-current", "step");
-    previous.disabled = number === 1;
-    next.disabled = number === items.length;
+    previous.disabled = number === 0;
+    next.disabled = number === items.length - 1;
     error.hidden = true;
     status.textContent = `${number}단계 ${label}`;
   } else if (play) {
@@ -63,7 +58,8 @@ function showStep(number, { play = false, updateUrl = false, scroll = false } = 
   }
   if (updateUrl && stepFromLocation() !== number) {
     const url = new URL(location.href);
-    url.searchParams.set("step", number);
+    url.searchParams.delete("step");
+    url.searchParams.set("stage", number);
     history.pushState(null, "", url);
   }
   if (scroll && player.getBoundingClientRect().top < 0) {

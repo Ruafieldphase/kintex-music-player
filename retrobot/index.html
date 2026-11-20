@@ -3,17 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="하이파이브 페스타 레트로봇 조립 안내. 눈, 귀, 다리를 체결하는 여섯 단계를 골라 보세요.">
+  <meta name="description" content="하이파이브 페스타 레트로봇 조립 안내. 정면 분해도와 눈·귀·손·발 조립 여덟 단계를 골라 보세요.">
   <meta name="theme-color" content="#f2ede3">
   <title>레트로봇 조립 안내 | 하이파이브 페스타</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="script.js" defer></script>
+  <link rel="stylesheet" href="styles.css?v=8">
+  <script src="script.js?v=8" defer></script>
 </head>
 <body>
   <header class="topbar">
     <div class="wrap topbar-inner">
       <a class="wordmark" href="./"><span class="mark" aria-hidden="true"><i></i><i></i></span> 하이파이브 페스타</a>
-      <a class="print-link" href="media/guide-a4.pdf">A4 설명서 <span aria-hidden="true">↗</span></a>
+      <a class="print-link" href="media/guide-a4.pdf?v=8">A4 설명서 <span aria-hidden="true">↗</span></a>
     </div>
   </header>
   <main class="wrap">
@@ -22,60 +22,66 @@
         <h1 id="guide-title">레트로봇 조립 안내</h1>
         <p>몸통의 얼굴이 나를 향하게 놓고 시작하세요. 오른쪽과 왼쪽은 보는 사람 기준입니다.</p>
       </div>
-      <img src="media/cover.jpg" alt="눈, 귀, 다리까지 조립한 캄포 레트로봇" width="500" height="375" fetchpriority="low">
+      <img src="media/cover.jpg" alt="눈, 귀, 손, 발까지 조립한 캄포 레트로봇" width="500" height="375" fetchpriority="low">
     </section>
 
     <div class="guide-grid">
       <section class="player" aria-labelledby="stage-heading">
         <div class="player-heading">
-          <span class="counter" id="counter" aria-label="총 6단계 중 1단계">01 / 06</span>
-          <h2 id="stage-heading">오른쪽 눈</h2>
+          <span class="counter" id="counter" aria-label="시작">시작</span>
+          <h2 id="stage-heading">정면 분해도</h2>
         </div>
         <div class="viewport">
-          <video id="stage-video" src="media/01.mp4" poster="media/01.jpg" controls playsinline muted preload="metadata" aria-label="오른쪽 눈 체결 영상"></video>
+          <video id="stage-video" src="media/eight/overview.mp4" poster="media/eight/overview.jpg" controls playsinline muted preload="metadata" aria-label="정면 분해도 영상"></video>
         </div>
-        <p id="instruction" class="instruction">육각 테두리를 먼저 놓고, 검은 짧은 나사를 체결하세요.</p>
+        <p id="instruction" class="instruction">완성품이 펼쳐지면 눈·귀·손·발의 위치와 나사 크기를 살펴보세요. 다시 모인 뒤에는 원하는 단계를 골라 볼 수 있어요.</p>
         <div class="controls" aria-label="영상 조작">
           <button id="previous" type="button" disabled><span aria-hidden="true">←</span> 이전</button>
           <button id="replay" type="button"><span aria-hidden="true">↻</span> 다시 보기</button>
           <button id="next" class="primary" type="button">다음 <span aria-hidden="true">→</span></button>
         </div>
         <p class="sr-only" id="status" role="status" aria-live="polite"></p>
-        <p id="load-error" class="load-error" hidden>영상을 불러오지 못했어요. <a id="direct-video" href="media/01.mp4">영상 파일 열기</a></p>
+        <p id="load-error" class="load-error" hidden>영상을 불러오지 못했어요. <a id="direct-video" href="media/eight/overview.mp4">영상 파일 열기</a></p>
       </section>
 
       <nav class="stages" aria-labelledby="stages-heading">
         <h2 id="stages-heading">단계 선택</h2>
         <ol>
-          <li><a href="?step=1" data-step="1" aria-current="step"><b>01</b><span>오른쪽 눈</span></a></li>
-          <li><a href="?step=2" data-step="2"><b>02</b><span>왼쪽 눈</span></a></li>
-          <li><a href="?step=3" data-step="3"><b>03</b><span>왼쪽 귀</span></a></li>
-          <li><a href="?step=4" data-step="4"><b>04</b><span>오른쪽 귀</span></a></li>
-          <li><a href="?step=5" data-step="5"><b>05</b><span>왼쪽 다리</span></a></li>
-          <li><a href="?step=6" data-step="6"><b>06</b><span>오른쪽 다리</span></a></li>
+          <li><a href="?stage=0" data-step="0" data-instruction="완성품이 펼쳐지면 눈·귀·손·발의 위치와 나사 크기를 살펴보세요. 다시 모인 뒤에는 원하는 단계를 골라 볼 수 있어요." aria-current="step"><b>시작</b><span>정면 분해도</span></a></li>
+          <li><a href="?stage=1" data-step="1" data-instruction="오른쪽 눈 구멍에 육각 테두리를 놓고 중간 나사를 조여요."><b>01</b><span>오른쪽 눈</span></a></li>
+          <li><a href="?stage=2" data-step="2" data-instruction="왼쪽에도 육각 테두리를 놓고 중간 나사를 조여요."><b>02</b><span>왼쪽 눈</span></a></li>
+          <li><a href="?stage=3" data-step="3" data-instruction="날개너트의 가운데 구멍을 왼쪽 옆면에 맞추고 작은 나사를 조여요."><b>03</b><span>왼쪽 귀</span></a></li>
+          <li><a href="?stage=4" data-step="4" data-instruction="같은 쪽 귀 아래에 손 부품의 둥근 구멍을 맞추고 작은 나사를 조여요."><b>04</b><span>왼쪽 손</span></a></li>
+          <li><a href="?stage=5" data-step="5" data-instruction="반대쪽으로 돌려요. 둥근 테두리의 넓은 면을 밖으로 놓고 작은 나사를 조여요."><b>05</b><span>오른쪽 귀</span></a></li>
+          <li><a href="?stage=6" data-step="6" data-instruction="오른쪽 귀 아래에도 손 부품의 구멍을 맞추고 작은 나사를 조여요."><b>06</b><span>오른쪽 손</span></a></li>
+          <li><a href="?stage=7" data-step="7" data-instruction="밑면 왼쪽에 큰 나사를 조여요. 바깥에 남은 나사 머리가 발이 돼요."><b>07</b><span>왼쪽 발</span></a></li>
+          <li><a href="?stage=8" data-step="8" data-instruction="밑면 오른쪽도 조인 뒤, 양발이 나온 길이를 공방 완성 샘플과 맞춰요."><b>08</b><span>오른쪽 발</span></a></li>
         </ol>
         <details id="full">
           <summary>전체 조립 영상</summary>
-          <video id="full-video" data-src="media/assembly.mp4" poster="media/cover.jpg" controls playsinline muted preload="none" aria-label="레트로봇 전체 조립 영상"></video>
-          <a class="download" href="media/assembly.mp4">전체 영상 파일 열기 ↗</a>
+          <video id="full-video" data-src="media/assembly.mp4?v=8" poster="media/cover.jpg" controls playsinline muted preload="none" aria-label="레트로봇 전체 조립 영상"></video>
+          <a class="download" href="media/assembly.mp4?v=8">전체 영상 파일 열기 ↗</a>
         </details>
       </nav>
     </div>
 
     <details class="parts">
-      <summary>부품 모양 비교하기</summary>
-      <p>짧은 검은 나사는 눈과 귀에, 긴 검은 나사는 다리에 쓰입니다. 왼쪽 귀는 날개형이고 오른쪽 귀는 둥근 원반형입니다.</p>
-      <img src="media/parts.jpg" loading="lazy" width="775" height="790" alt="완성된 레트로봇 주변에 육각 눈 테두리, 날개형 귀, 둥근 귀, 짧은 나사와 긴 다리 나사를 펼쳐 놓은 그림">
+      <summary>부품 이름과 나사 크기</summary>
+      <p>중간 나사 2개는 육각 눈 테두리 2개에, 작은 나사 4개는 날개너트·둥근 귀 테두리·납작한 손 2개에 써요. 큰 나사 2개는 그대로 발이 돼요. 캄포 몸통 위에는 키링이 달려 있어요.</p>
+      <a href="media/eight/parts.jpg"><img src="media/eight/parts.jpg" loading="lazy" width="960" height="540" alt="정면 분해도. 위쪽은 눈, 옆은 두 종류의 귀와 납작한 손, 아래쪽은 발이 되는 큰 나사입니다."></a>
     </details>
     <noscript>
       <p>단계별 영상 파일을 열 수 있습니다.</p>
       <ol>
-        <li><a href="media/01.mp4">오른쪽 눈</a></li>
-        <li><a href="media/02.mp4">왼쪽 눈</a></li>
-        <li><a href="media/03.mp4">왼쪽 귀</a></li>
-        <li><a href="media/04.mp4">오른쪽 귀</a></li>
-        <li><a href="media/05.mp4">왼쪽 다리</a></li>
-        <li><a href="media/06.mp4">오른쪽 다리</a></li>
+        <li><a href="media/eight/overview.mp4">정면 분해도</a></li>
+        <li><a href="media/eight/01.mp4">오른쪽 눈</a></li>
+        <li><a href="media/eight/02.mp4">왼쪽 눈</a></li>
+        <li><a href="media/eight/03.mp4">왼쪽 귀</a></li>
+        <li><a href="media/eight/04.mp4">왼쪽 손</a></li>
+        <li><a href="media/eight/05.mp4">오른쪽 귀</a></li>
+        <li><a href="media/eight/06.mp4">오른쪽 손</a></li>
+        <li><a href="media/eight/07.mp4">왼쪽 발</a></li>
+        <li><a href="media/eight/08.mp4">오른쪽 발</a></li>
       </ol>
     </noscript>
   </main>

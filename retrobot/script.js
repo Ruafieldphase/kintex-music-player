@@ -52,7 +52,7 @@ function showStep(number, { play = false, updateUrl = false, scroll = false } = 
   if (number !== active) {
     video.pause();
     active = number;
-    const version = number === 0 ? "?v=9" : "?v=11";
+    const version = number === 0 || number === stepCount ? "?v=13" : "?v=11";
     video.poster = `media/eight/${code}.jpg${version}`;
     video.src = `media/eight/${code}.mp4${version}`;
     updateReplayLabel();

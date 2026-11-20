@@ -6,6 +6,10 @@ const fullVideo = document.getElementById("full-video");
 const previous = document.getElementById("previous");
 const next = document.getElementById("next");
 const replay = document.getElementById("replay");
+const replayIcon = document.getElementById("replay-icon");
+const replayLabel = document.getElementById("replay-label");
+const stageJump = document.querySelector(".stage-jump");
+const stagePicker = document.getElementById("stages-heading");
 const heading = document.getElementById("stage-heading");
 const counter = document.getElementById("counter");
 const instruction = document.getElementById("instruction");
@@ -32,6 +36,14 @@ function playStep() {
   });
 }
 
+function updateReplayLabel() {
+  const replaying = video.currentTime > 0;
+  const label = replaying ? "다시 보기" : "영상 재생";
+  if (replayLabel.textContent === label) return;
+  replayLabel.textContent = label;
+  replayIcon.textContent = replaying ? "↻" : "▶";
+}
+
 function showStep(number, { play = false, updateUrl = false, scroll = false } = {}) {
   const code = number ? String(number).padStart(2, "0") : "overview";
   const item = items[number];
@@ -42,6 +54,7 @@ function showStep(number, { play = false, updateUrl = false, scroll = false } = 
     const version = number === 0 ? "?v=9" : "";
     video.poster = `media/eight/${code}.jpg${version}`;
     video.src = `media/eight/${code}.mp4${version}`;
+    updateReplayLabel();
     directVideo.href = video.src;
     heading.textContent = label;
     instruction.textContent = item.dataset.instruction;
@@ -53,7 +66,7 @@ function showStep(number, { play = false, updateUrl = false, scroll = false } = 
     previous.disabled = number === 0;
     next.disabled = number === items.length - 1;
     error.hidden = true;
-    status.textContent = `${number}단계 ${label}`;
+    status.textContent = number ? `${number}단계 ${label}` : label;
   } else if (play) {
     video.currentTime = 0;
   }
@@ -82,8 +95,16 @@ items.forEach((item) => {
 previous.addEventListener("click", () => showStep(active - 1, { play: true, updateUrl: true }));
 next.addEventListener("click", () => showStep(active + 1, { play: true, updateUrl: true }));
 replay.addEventListener("click", () => showStep(active, { play: true }));
+stageJump.addEventListener("click", (event) => {
+  if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  stagePicker.focus({ preventScroll: true });
+  stagePicker.scrollIntoView({ block: "nearest" });
+});
 window.addEventListener("popstate", () => showStep(stepFromLocation()));
 video.addEventListener("error", () => { error.hidden = false; });
+video.addEventListener("timeupdate", updateReplayLabel);
+video.addEventListener("emptied", updateReplayLabel);
 video.addEventListener("play", () => fullVideo.pause());
 fullVideo.addEventListener("play", () => video.pause());
 full.addEventListener("toggle", () => {

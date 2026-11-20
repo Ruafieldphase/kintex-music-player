@@ -1,4 +1,5 @@
 const items = [...document.querySelectorAll("[data-step]")];
+const stepCount = items.length - 1;
 const player = document.querySelector(".player");
 const video = document.getElementById("stage-video");
 const full = document.getElementById("full");
@@ -21,7 +22,7 @@ let active = -1;
 function stepFromLocation() {
   const params = new URL(location.href).searchParams;
   const stage = params.get("stage");
-  if (/^[0-8]$/.test(stage ?? "")) return Number(stage);
+  if (/^(0|[1-9]\d*)$/.test(stage ?? "") && Number(stage) <= stepCount) return Number(stage);
   // Keep previously shared six-stage links pointing to the original part.
   const legacy = params.get("step");
   return /^[1-6]$/.test(legacy ?? "") ? [0,1,2,3,5,7,8][Number(legacy)] : 0;
@@ -51,20 +52,20 @@ function showStep(number, { play = false, updateUrl = false, scroll = false } = 
   if (number !== active) {
     video.pause();
     active = number;
-    const version = number === 0 ? "?v=9" : "";
+    const version = number === 0 ? "?v=9" : "?v=11";
     video.poster = `media/eight/${code}.jpg${version}`;
     video.src = `media/eight/${code}.mp4${version}`;
     updateReplayLabel();
     directVideo.href = video.src;
     heading.textContent = label;
     instruction.textContent = item.dataset.instruction;
-    counter.textContent = number ? `${code} / 08` : "시작";
-    counter.setAttribute("aria-label", number ? `총 8단계 중 ${number}단계` : "시작");
+    counter.textContent = number ? `${code} / ${stepCount}` : "시작";
+    counter.setAttribute("aria-label", number ? `총 ${stepCount}단계 중 ${number}단계` : "시작");
     video.setAttribute("aria-label", `${label} 영상`);
     items.forEach((link) => link.removeAttribute("aria-current"));
     item.setAttribute("aria-current", "step");
     previous.disabled = number === 0;
-    next.disabled = number === items.length - 1;
+    next.disabled = number === stepCount;
     error.hidden = true;
     status.textContent = number ? `${number}단계 ${label}` : label;
   } else if (play) {

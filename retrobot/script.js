@@ -39,8 +39,9 @@ function showStep(number, { play = false, updateUrl = false, scroll = false } = 
   if (number !== active) {
     video.pause();
     active = number;
-    video.poster = `media/eight/${code}.jpg`;
-    video.src = `media/eight/${code}.mp4`;
+    const version = number === 0 ? "?v=9" : "";
+    video.poster = `media/eight/${code}.jpg${version}`;
+    video.src = `media/eight/${code}.mp4${version}`;
     directVideo.href = video.src;
     heading.textContent = label;
     instruction.textContent = item.dataset.instruction;
